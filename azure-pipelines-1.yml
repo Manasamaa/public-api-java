@@ -26,3 +26,8 @@ steps:
     testType: 'app'
     monitorWhen: 'always'
     failOnIssues: false
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'sonar'
+    organization: 'manasamaa'
+    scannerMode: 'Other'
