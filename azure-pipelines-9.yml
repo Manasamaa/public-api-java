@@ -1,0 +1,29 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Maven@4
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'compile'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+- task: ostorlab-azure-security-scanner@1
+  inputs:
+    apiKey: 'HZqQDAf5*********************************'
+    filepath: 'https://dev.azure.com/manasav1204/manasav1204/_build/results?buildId=236&view=logs&j=12f1170f-54f2-53f3-20dd-22fc7dff55f9&t=ce18b30f-11b8-5f1e-8fbd-391708956df7&l=15'
+    platform: 'android'
+    artifactsDir: '$(build.artifactStagingDirectory)/ostorlabArtifacts'
