@@ -27,3 +27,8 @@ steps:
     testType: 'app'
     monitorWhen: 'always'
     failOnIssues: false
+- task: dependency-check-build-task@6
+  inputs:
+    projectName: 'manasav1204'
+    scanPath: '/usr/bin/mvn -f /home/vsts/work/1/s/pom.xml compile'
+    format: 'HTML'
